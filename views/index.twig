@@ -8,6 +8,11 @@
 </head>
 <body>
     <h3>Liste des villes</h3>
+    <form id="searchForm" action="/search" method="GET">
+        <label for="ville">Nom de la ville :</label>
+        <input type="text" id="ville" name="ville" placeholder="Rechercher une ville...">
+        <button type="submit">Rechercher</button>
+    </form>
     <table>
         <thead>
             <tr>
@@ -16,11 +21,17 @@
                 <th>Latitude</th>
             </tr>
         </thead>
-        <tbody>
-                {% for city in cities %}
-                <tr onclick=""><td>{{ city.name }}</td> <td>{{ city.long }}</td> <td>{{ city.lat }}</td></tr>
-                {% endfor %}
+        <tbody id="citiesTableBody">
+            {% for city in cities %}
+            <tr>
+                <td>{{ city.name }}</td>
+                <td>{{ city.long }}</td>
+                <td>{{ city.lat }}</td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
+
+    <script src="/script.js"></script> <!-- Ajoutez cette ligne pour inclure le fichier JavaScript -->
 </body>
 </html>

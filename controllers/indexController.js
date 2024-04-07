@@ -12,4 +12,16 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Route pour rechercher une ville par son nom
+router.get('/search', async (req, res) => {
+    try {
+        const cityName = req.query.ville;
+        const cities = await db.searchCity(cityName);
+        res.json(cities); // Renvoyer les résultats de la recherche au format JSON
+    } catch (err) {
+        res.status(500).send('Erreur interne du serveur');
+    }
+});
+
+
 module.exports = router;
