@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    <title>Liste des villes</title>
 </head>
 <body>
-    <h1>{{ title }}</h1>
-    <p>C'est la page d'accueil</p>
+    <h1>Liste des villes</h1>
+    <ul>
+        {% for city in cities %}
+            <li>{{ city.name }} ({{ city.lat }}, {{ city.long }})</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
