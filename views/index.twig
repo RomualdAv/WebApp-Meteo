@@ -3,14 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
     <title>Liste des villes</title>
 </head>
 <body>
-    <h1>Liste des villes</h1>
-    <ul>
-        {% for city in cities %}
-            <li>{{ city.name }} ({{ city.lat }}, {{ city.long }})</li>
-        {% endfor %}
-    </ul>
+    <h3>Liste des villes</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Longitude</th>
+                <th>Latitude</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for city in cities %}
+                <tr onclick=""><td>{{ city.name }}</td> <td>{{ city.long }}</td> <td>{{ city.lat }}</td></tr>
+                {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
