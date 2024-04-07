@@ -20,9 +20,9 @@ async function getAllCities() {
 async function searchCity(cityName) {
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(path.join(__dirname, 'main.db'));
-        const query = 'SELECT * FROM city WHERE name LIKE ?'; // Utilisation de LIKE pour rechercher des correspondances partielles
+        const query = `SELECT * FROM city WHERE name LIKE %${cityName}%`; // Utilisation de LIKE pour rechercher des correspondances partielles
 
-        db.all(query, [`%${cityName}%`], (err, rows) => {
+        db.all(query, (err, rows) => {
             if (err) {
                 reject(err);
             } else {
@@ -36,13 +36,13 @@ async function searchCity(cityName) {
 async function addCity(name, longitude, latitude) {
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(path.join(__dirname, 'main.db'));
-        const query = 'INSERT INTO city (name, long, lat) VALUES (?, ?, ?)';
+        const query = `INSERT INTO city (name, long, lat) VALUES (?, ?, ?)`;
 
-        db.run(query, [name, longitude, latitude], function(err) {
+        db.run(query, [name, longitude, latitude], (err) => {
             if (err) {
                 reject(err);
             } else {
-                resolve(this.lastID); // Renvoie l'ID de la dernière ligne insérée
+                resolve(this.lastID);
             }
             db.close();
         });

@@ -35,7 +35,7 @@
         </thead>
         <tbody id="citiesTableBody">
             {% for city in cities %}
-            <tr>
+            <tr onclick="fetchWeatherData('{{ city.long }}', '{{ city.lat }}')">
                 <td>{{ city.name }}</td>
                 <td>{{ city.long }}</td>
                 <td>{{ city.lat }}</td>
@@ -44,6 +44,6 @@
         </tbody>
     </table>
 
-    <script src="/script.js"></script> <!-- Ajoutez cette ligne pour inclure le fichier JavaScript -->
+    <script src="/script.js"></script>
 </body>
 </html>

@@ -5,7 +5,6 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-
 app.use(express.urlencoded({ extended: true })); // permet à Express d'analyser les données envoyées dans le corps d'une requête POST
 
 app.set('view engine', 'twig');
