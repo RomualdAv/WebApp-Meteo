@@ -1,26 +1,20 @@
 const express = require('express');
-const twig = require('twig');
+const Twig = require('twig');
+const path = require('path');
 
 const app = express();
-
 const port = 3000;
 
 
 app.set('view engine', 'twig');
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname, 'views'));
 
+// Middleware pour servir les fichiers statiques depuis le dossier public
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.render('index', { title: 'Accueil' });
-});
-
-app.get('/page1', (req, res) => {
-  res.render('page1', { title: 'Page 1' });
-});
-
-app.get('/page2', (req, res) => {
-  res.render('page2', { title: 'Page 2' });
-});
+// Routes
+const indexController = require(path.join(__dirname, 'controllers/indexController'));
+app.use('/', indexController);
 
 
 app.listen(port, () => {
