@@ -33,7 +33,24 @@ async function searchCity(cityName) {
     });
 }
 
+async function addCity(name, longitude, latitude) {
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(path.join(__dirname, 'main.db'));
+        const query = 'INSERT INTO city (name, long, lat) VALUES (?, ?, ?)';
+
+        db.run(query, [name, longitude, latitude], function(err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(this.lastID); // Renvoie l'ID de la dernière ligne insérée
+            }
+            db.close();
+        });
+    });
+}
+
 module.exports = {
     getAllCities,
-    searchCity
+    searchCity,
+    addCity
 };
