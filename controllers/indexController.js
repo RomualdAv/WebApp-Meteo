@@ -23,6 +23,7 @@ router.get('/search', async (req, res) => {
     }
 });
 
+
 // Route pour l'ajout d'une ville
 router.post('/add-city', async (req, res) => {
     try {

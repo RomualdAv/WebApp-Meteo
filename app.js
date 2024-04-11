@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true })); // permet à Express d'analyser
 app.set('view engine', 'twig');
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware pour servir les fichiers depuis le dossier public
+// Middleware pour servir les fichiers depuis le dossier public et png
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
