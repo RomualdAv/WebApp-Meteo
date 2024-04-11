@@ -4,46 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
-    <title>METEO</title>
+    <title>Application MÉTÉO</title>
 </head>
 <body>
+    <video id="backgroundVideo" src="/backgroundVideo.mp4" type="video/mp4" autoplay muted loop></video>
+    <!--AFFICHAGE DES DONNÉES-->
+    <div class="boxContainer" id="resultDisplay">
+        <h3>Actuellement à</h3>
+        <h6 id="cityTitle">Ville</h6>
+        <img id="mainIcon" src="/png/clearsky_day.png">
+        <p id="actTemperature">30 C°</p>
+        <p id="actCloudFraction">converture nuageuse : 25 %</p>
+        <p id="actHumidity">humidité : 72%</p>
+        <p id="actWindSpeed">vitesse du vent : 1m/s</p>
+        <!--Petites cartes pour les prévisions-->
+        <div id="cardsContainer">
+            <div class="card">
+                <h6>1h</h6>
+                <img id="1Icon" class="cardIcon" src="/png/clearsky_day.png">
+            </div>
+            <div class="card">
+                <h6>6h</h6>
+                <img id="6Icon" class="cardIcon" src="/png/clearsky_day.png">
+            </div>
+            <div class="card">
+                <h6>12h</h6>
+                <img id="12Icon" class="cardIcon" src="/png/clearsky_day.png">
+            </div>
+        </div>
+    </div>
     <!--FORM POUR AJOUTER UNE VILLE-->
-    <h3>Ajouter une ville</h3>
-    <form action="/add-city" method="POST">
-        <label for="name">Nom de la ville :</label>
-        <input type="text" id="name" name="name" required>
-        <label for="longitude">Longitude :</label>
-        <input type="text" id="longitude" name="longitude" required>
-        <label for="latitude">Latitude :</label>
-        <input type="text" id="latitude" name="latitude" required>
-        <button type="submit">Ajouter</button>
-    </form>
-    <!--BARRE DE RECHERCHES ET LISTE DES VILLES-->
-    <h3>Liste des villes</h3>
-    <form id="searchForm" action="/search" method="GET">
-        <label for="ville">Nom de la ville :</label>
-        <input type="text" id="ville" name="ville" placeholder="Rechercher une ville...">
-        <button type="submit">Rechercher</button>
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Longitude</th>
-                <th>Latitude</th>
-            </tr>
-        </thead>
-        <tbody id="citiesTableBody">
-            {% for city in cities %}
-            <tr>
-                <td>{{ city.name }}</td>
-                <td>{{ city.long }}</td>
-                <td>{{ city.lat }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <aside>
+        <div class="boxContainer">
+            <h3>Ajouter une ville</h3>
+            <form action="/add-city" method="POST">
+                <label for="name">Nom de la ville :</label>
+                <input type="text" id="name" name="name" required>
+                <label for="longitude">Longitude :</label>
+                <input type="text" id="longitude" name="longitude" required>
+                <label for="latitude">Latitude :</label>
+                <input type="text" id="latitude" name="latitude" required>
+                <button type="submit">Ajouter</button>
+            </form>
+        </div>
+    
+        <!--BARRE DE RECHERCHES ET LISTE DES VILLES-->
+        <div class="boxContainer" id="cityList">
+            <h3>Liste des villes</h3>
+            <form id="searchForm" action="/search" method="GET">
+                <input type="text" id="ville" name="ville" placeholder="Rechercher une ville...">
+                <button type="submit">Rechercher</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Longitude</th>
+                        <th>Latitude</th>
+                    </tr>
+                </thead>
+                <tbody id="citiesTableBody">
+                    {% for city in cities %}
+                    <tr onclick="fetchWeatherData('{{city.name}}','{{ city.long }}', '{{ city.lat }}')">
+                        <td>{{ city.name }}</td>
+                        <td>{{ city.long }}</td>
+                        <td>{{ city.lat }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </aside>
 
-    <script src="/script.js"></script> <!-- Ajoutez cette ligne pour inclure le fichier JavaScript -->
+    <script src="/script.js"></script>
 </body>
 </html>
