@@ -77,9 +77,6 @@ function displayWeatherData(weatherData) {
         weatherData.data.next_12_hours.details.precipitation_amount // peut être nul
                         
         **/
-    
-        //const citiesTableBody = document.getElementById('citiesTableBody');
-        //citiesTableBody.innerHTML = '';
 
     const mainIcon = document.getElementById('mainIcon');
     mainIcon.src = "/png/" + weatherData.data.next_1_hours.summary.symbol_code + ".png";
