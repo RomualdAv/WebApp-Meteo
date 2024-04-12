@@ -138,3 +138,15 @@ button:hover {
     background-image: linear-gradient(180deg, #f5f5fa, #fff);
     box-shadow: 0 6px 15px 0 rgb(37 44 97 / 20%), 0 2px 4px 0 rgb(93 100 148 / 25%);
 }
+
+
+/* RESPONSIVE */
+
+@media screen and (max-aspect-ratio: 16/9) {
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
